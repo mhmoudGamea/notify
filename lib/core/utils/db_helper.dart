@@ -31,11 +31,11 @@ class DBHelper {
         .insert(tableName, data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  //this method used to get all entries in DB based on specific date
+  //this method used to get all entries in DB based on specific date and get daily notes as well
   static Future<List<Map<String, dynamic>>> queryByDate(String? date) async {
     return await _db!.query(tableName,
-        where: date == null ? null : 'date = ?',
-        whereArgs: date == null ? [] : [date]);
+        where: date == null ? 'repeat = ?' : 'date = ? OR repeat = ?',
+        whereArgs: date == null ? ['Daily'] : [date, 'Daily']);
   }
 
   static Future<int> deleteNote({required int id}) async {
@@ -54,17 +54,17 @@ class DBHelper {
     return await _db!.query(tableName);
   }
 
-  //this method used to get all entries where isCompleted column = 0 or 1 [mean it's todo  or completed]
-  static Future<List<Map<String, dynamic>>> queryIsCompleted(
-      int isCompleted) async {
-    return await _db!
-        .query(tableName, where: 'isCompleted = ?', whereArgs: [isCompleted]);
-  }
+  // //this method used to get all entries where isCompleted column = 0 or 1 [mean it's todo  or completed]
+  // static Future<List<Map<String, dynamic>>> queryIsCompleted(
+  //     int isCompleted) async {
+  //   return await _db!
+  //       .query(tableName, where: 'isCompleted = ?', whereArgs: [isCompleted]);
+  // }
 
-  //this 'll get all notes that it's deadline has gone without complete it
-  static Future<List<Map<String, dynamic>>> queryDelayed(
-      {required String currentDate}) async {
-    return await _db!
-        .query(tableName, where: 'date < ?', whereArgs: [currentDate]);
-  }
+  // //this 'll get all notes that it's deadline has gone without complete it
+  // static Future<List<Map<String, dynamic>>> queryDelayed(
+  //     {required String currentDate}) async {
+  //   return await _db!
+  //       .query(tableName, where: 'date < ?', whereArgs: [currentDate]);
+  // }
 }
