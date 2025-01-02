@@ -17,7 +17,7 @@ class NoNotes extends StatelessWidget {
             Image.asset(Assets.imagesNoNote, width: 200),
             Text(
               message,
-              style: Styles.title16Light.copyWith(fontWeight: FontWeight.w600),
+              style: Styles.title15Light.copyWith(color: Colors.grey),
               textAlign: TextAlign.center,
             ),
           ],
