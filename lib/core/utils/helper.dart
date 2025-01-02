@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
-import 'package:notify/core/utils/styles.dart';
-import 'package:notify/features/notify/data/models/my_notes_model.dart';
-import 'package:notify/features/notify/presentation/model_views/theme/theme_cubit.dart';
 
+import '../../features/notify/data/models/my_notes_model.dart';
+import '../../features/notify/presentation/model_views/theme/theme_cubit.dart';
+import '../config/app_colors.dart';
+import '../config/app_style.dart';
+import '../config/constants.dart';
 import 'bottom_sheet_widget.dart';
+
+enum Message {
+  error,
+  success,
+}
 
 abstract class Helper {
   static final themeCubit = GetIt.I.get<ThemeCubit>();
@@ -91,44 +98,37 @@ abstract class Helper {
     );
   }
 
-  static void showCustomToast({
-    required BuildContext context,
-    required Color bgColor,
-    required IconData icon,
-    required String msg,
-  }) {
-    FToast fToast = FToast();
-    fToast.init(context);
-    Widget toast = Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5), color: bgColor),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: Colors.white,
-              size: 18,
-            ),
-            const SizedBox(width: 10),
-            Flexible(
-              child: Text(
-                msg,
-                style: Styles.title14Light.copyWith(color: Colors.white),
+  static toastMessage(BuildContext context,
+      {required Message type, required String message}) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          height: 80,
+          decoration: BoxDecoration(
+            color: type == Message.success
+                ? AppColors.successColor
+                : AppColors.failColor,
+            borderRadius: BorderRadius.circular(Constants.borderRadius),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.check,
+                color: Colors.white,
+                size: 22,
               ),
-            ),
-          ],
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(message, style: AppStyle.font13SemiBold),
+              ),
+            ],
+          ),
         ),
       ),
-    );
-    fToast.showToast(
-      child: toast,
-      toastDuration: const Duration(seconds: 2),
-      fadeDuration: const Duration(milliseconds: 500),
-      gravity: ToastGravity.BOTTOM,
     );
   }
 

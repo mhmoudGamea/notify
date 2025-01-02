@@ -137,25 +137,16 @@ class FormCubit extends Cubit<FormState> {
   //Validate function 'll be tregared when user hit add note button
   void validate(BuildContext context) async {
     if (getTitleController.text.isEmpty && getNoteController.text.isEmpty) {
-      Helper.showCustomToast(
-          context: context,
-          bgColor: AppTheme.darkBlue,
-          icon: Icons.warning_amber_rounded,
-          msg: 'Title & note fields are required');
+      Helper.toastMessage(context,
+          type: Message.error, message: 'Title & note fields are required');
     } else if (getTitleController.text.isEmpty &&
         getNoteController.text.isNotEmpty) {
-      Helper.showCustomToast(
-          context: context,
-          bgColor: AppTheme.darkBlue,
-          icon: Icons.warning_amber_rounded,
-          msg: 'Title field is required');
+      Helper.toastMessage(context,
+          type: Message.error, message: 'Title field is required');
     } else if (getTitleController.text.isNotEmpty &&
         getNoteController.text.isEmpty) {
-      Helper.showCustomToast(
-          context: context,
-          bgColor: AppTheme.darkBlue,
-          icon: Icons.warning_amber_rounded,
-          msg: 'Note field is required');
+      Helper.toastMessage(context,
+          type: Message.error, message: 'Note field is required');
     } else {
       await submitTodb(context);
     }
@@ -180,19 +171,13 @@ class FormCubit extends Cubit<FormState> {
     ));
 
     response.fold((failure) {
-      Helper.showCustomToast(
-          context: context,
-          bgColor: Colors.red,
-          icon: Icons.dangerous,
-          msg: failure.errMessage);
+      Helper.toastMessage(context,
+          type: Message.error, message: failure.errMessage);
     }, (success) async {
       await BlocProvider.of<NotesCubit>(context)
           .getNotes(DateFormat.yMd().format(DateTime.now()));
-      Helper.showCustomToast(
-          context: context,
-          bgColor: AppTheme.darkBlue,
-          icon: Icons.done_rounded,
-          msg: success.successMessage);
+      Helper.toastMessage(context,
+          type: Message.success, message: success.successMessage);
     });
     GoRouter.of(context).pop();
   }

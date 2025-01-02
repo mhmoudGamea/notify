@@ -22,11 +22,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(NotesLoading());
     final result = await _profileRepo.queryAll();
     result.fold((failure) {
-      Helper.showCustomToast(
-          context: context,
-          bgColor: Colors.red,
-          icon: Icons.dangerous,
-          msg: failure.errMessage);
+      Helper.toastMessage(context,
+          type: Message.error, message: failure.errMessage);
+
       emit(NotesFailure());
     }, (success) {
       _notes = success;
