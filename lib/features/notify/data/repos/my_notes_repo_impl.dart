@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 
 import 'package:notify/core/errors/failure.dart';
@@ -9,13 +11,13 @@ import 'my_notes_repo.dart';
 
 class MyNotesRepoImpl extends MyNotesRepo {
   @override
-  Future<Either<Failure, List<MyNotesModel>>> getAllNotes(String? date) async {
+  Future<Either<Failure, List<MyNotesModel>>> getAllNotes(String date) async {
     try {
       final result = await DBHelper.queryByDate(date);
-
+      log('Success in MyNotesRepoImpl - getAllNotes method');
       return right(MyNotesModel.myNotesModelList(result));
     } catch (error) {
-      print(error.toString());
+      log('Error in MyNotesRepoImpl - getAllNotes method${error.toString()}');
       return left(
           DataBaseFailure.fromAddingNote('Error happen while getting notes'));
     }

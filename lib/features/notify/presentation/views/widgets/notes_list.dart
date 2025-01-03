@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -21,12 +23,14 @@ class NotesList extends StatelessWidget {
         final DateTime noteTime =
             DateFormat.Hm().parse(notesList[index].startTime);
         final String time = DateFormat('HH:MM').format(noteTime);
-        NotificationServices.scheduleNotification(
-          flnp: FlutterLocalNotificationsPlugin(),
-          hour: int.parse(time.split(':')[0]),
-          minute: int.parse(time.split(':')[1]),
-          myNotesModel: notesList[index],
-        );
+        log(noteTime.toString());
+        log(time);
+        // NotificationServices.scheduleNotification(
+        //   flnp: FlutterLocalNotificationsPlugin(),
+        //   hour: int.parse(time.split(':')[0]),
+        //   minute: int.parse(time.split(':')[1]),
+        //   myNotesModel: notesList[index],
+        // );
         return AnimationConfiguration.staggeredList(
           position: index,
           child: SlideAnimation(

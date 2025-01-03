@@ -35,10 +35,12 @@ class DBHelper {
   }
 
   //this method used to get all entries in DB based on specific date and get daily notes as well
-  static Future<List<Map<String, dynamic>>> queryByDate(String? date) async {
-    return await _db!.query(tableName,
-        where: date == null ? 'repeat = ?' : 'date = ? OR repeat = ?',
-        whereArgs: date == null ? ['Daily'] : [date, 'Daily']);
+  static Future<List<Map<String, dynamic>>> queryByDate(String date) async {
+    return await _db!.query(
+      tableName,
+      where: 'date = ?',
+      whereArgs: [date],
+    );
   }
 
   static Future<int> deleteNote({required int id}) async {

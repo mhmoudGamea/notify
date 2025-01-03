@@ -40,7 +40,7 @@ class DateSection extends StatelessWidget {
                 fontWeight: FontWeight.w600),
         onDateChange: (date) {
           BlocProvider.of<NotesCubit>(context)
-              .getNotes(DateFormat.yMd().format(date));
+              .getNotes(date: DateFormat.yMd().format(date));
         },
       ),
     );

@@ -159,35 +159,40 @@ class FormCubit extends Cubit<FormState> {
     String startTime = getStartTime.format(context);
     String endTime = getEndTime.format(context);
 
-    log(date);
-    log(startTime);
-    log(endTime);
-    log(getSelectedRemind.toString());
-    log(getSelectedRepeat);
-    log(getSelectedColor.value.toString());
+    // log(date);
+    // log(startTime);
+    // log(endTime);
+    // log(getSelectedRemind.toString());
+    // log(getSelectedRepeat);
+    // log(getSelectedColor.value.toString());
 
     final response = await _noteRepo.addNewNote(
-        noteModel: NoteModel(
-      title: getTitleController.text,
-      note: getNoteController.text,
-      date: date,
-      startTime: startTime,
-      endTime: endTime,
-      remind: getSelectedRemind,
-      repeat: getSelectedRepeat,
-      color: getSelectedColor.value,
-      isCompleted: 0,
-    ));
+      noteModel: NoteModel(
+        title: getTitleController.text,
+        note: getNoteController.text,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+        remind: getSelectedRemind,
+        repeat: getSelectedRepeat,
+        color: getSelectedColor.value,
+        isCompleted: 0,
+      ),
+    );
 
-    // response.fold((failure) {
-    //   Helper.toastMessage(context,
-    //       type: Message.error, message: failure.errMessage);
-    // }, (success) async {
-    //   await BlocProvider.of<NotesCubit>(context)
-    //       .getNotes(DateFormat.yMd().format(DateTime.now()));
-    //   Helper.toastMessage(context,
-    //       type: Message.success, message: success.successMessage);
-    // });
-    // GoRouter.of(context).pop();
+    // log();
+
+    // response.fold(ifLeft, ifRight)
+
+    response.fold((failure) {
+      Helper.toastMessage(context,
+          type: Message.error, message: failure.errMessage);
+    }, (success) async {
+      await BlocProvider.of<NotesCubit>(context).getNotes(
+          date: DateFormat.yMd().format(DateTime.now())); // =>  1/3/2025
+      Helper.toastMessage(context,
+          type: Message.success, message: success.successMessage);
+    });
+    GoRouter.of(context).pop();
   }
 }
