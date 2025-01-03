@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/utils/app_theme.dart';
 
@@ -15,22 +14,22 @@ class NotesNumberBox extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: 'You have ',
-        style: GoogleFonts.nunito(
+        style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.w800,
             color: theme ? Colors.white : Colors.black),
         children: [
           TextSpan(
             text: '$notesNumber notes',
-            style: GoogleFonts.nunito(
+            style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w900,
               color: AppTheme.darkBlue,
             ),
           ),
-          TextSpan(
+          const TextSpan(
             text: ' this month.',
-            style: GoogleFonts.nunito(
+            style: TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.w800,
             ),

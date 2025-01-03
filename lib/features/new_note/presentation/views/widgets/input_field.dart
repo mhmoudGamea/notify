@@ -6,7 +6,6 @@ import '../../../../../core/utils/helper.dart';
 class InputField extends StatelessWidget {
   final String hint;
   final bool readOnly;
-  final bool enableIcon;
   final IconData? icon;
   final VoidCallback? onPress;
   final int maxLines;
@@ -15,7 +14,6 @@ class InputField extends StatelessWidget {
       {Key? key,
       required this.hint,
       this.readOnly = false,
-      this.enableIcon = false,
       this.icon,
       this.onPress,
       this.maxLines = 1,
@@ -32,24 +30,23 @@ class InputField extends StatelessWidget {
         readOnly: readOnly,
         maxLines: maxLines,
         decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: Styles.title15Light,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-            enabledBorder: Helper.getBorder(),
-            focusedBorder: Helper.getBorder(),
-            disabledBorder: Helper.getBorder(),
-            border: Helper.getBorder(),
-            suffixIcon: enableIcon
-                ? IconButton(
-                    onPressed: onPress,
-                    icon: Icon(
-                      icon,
-                      size: 25,
-                      color: Colors.grey,
-                    ),
-                  )
-                : null),
+          hintText: hint,
+          hintStyle: Styles.title15Light,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+          enabledBorder: Helper.getBorder(),
+          focusedBorder: Helper.getBorder(),
+          disabledBorder: Helper.getBorder(),
+          border: Helper.getBorder(),
+          suffixIcon: IconButton(
+            onPressed: onPress,
+            icon: Icon(
+              icon,
+              size: 25,
+              color: Colors.grey,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -20,7 +20,7 @@ class NotesSection extends StatelessWidget {
                   message:
                       'No notes added yet. please add your first note for this day');
             }
-            return NotesList(notesList: state.myNotesList);
+            // return NotesList(notesList: state.myNotesList);
           } else if (state is NotesFailure) {
             return const Center(
               child: Text('eroooooooooooooooooooooor'),

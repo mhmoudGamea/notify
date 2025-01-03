@@ -22,8 +22,8 @@ class TimeSection extends StatelessWidget {
               const LabelText(title: 'Start time'),
               InputField(
                 hint: formData.getStartTime.format(context),
-                readOnly: true,
-                enableIcon: true,
+                // readOnly: false,
+                // enableIcon: true,
                 icon: Icons.access_time_rounded,
                 onPress: () async {
                   TimeOfDay? noteStartTime =
@@ -45,8 +45,8 @@ class TimeSection extends StatelessWidget {
               InputField(
                 //format return string like => 9: 30 AM
                 hint: formData.getEndTime.format(context),
-                readOnly: true,
-                enableIcon: true,
+                // readOnly: true,
+                // enableIcon: true,
                 icon: Icons.access_time_rounded,
                 onPress: () async {
                   TimeOfDay? noteEndTime =

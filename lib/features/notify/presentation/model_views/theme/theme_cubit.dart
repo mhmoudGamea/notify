@@ -15,7 +15,7 @@ class ThemeCubit extends Cubit<ThemeState> {
       appBarTheme: const AppBarTheme(backgroundColor: AppTheme.white),
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppTheme.white,
-      fontFamily: 'Nunito',
+      fontFamily: 'cairo',
     );
   }
 
@@ -25,7 +25,7 @@ class ThemeCubit extends Cubit<ThemeState> {
       appBarTheme: const AppBarTheme(backgroundColor: AppTheme.secondaryDark),
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppTheme.secondaryDark,
-      fontFamily: 'Nunito',
+      fontFamily: 'cairo',
     );
   }
 

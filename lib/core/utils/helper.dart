@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/notify/data/models/my_notes_model.dart';
@@ -79,8 +78,8 @@ abstract class Helper {
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2024),
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().year).add(const Duration(days: 365)),
       builder: (context, child) {
         return themeCubit.getDateTimeTheme(context, child);
       },

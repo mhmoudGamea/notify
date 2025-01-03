@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:notify/core/utils/app_images.dart';
 import 'package:notify/core/utils/app_theme.dart';
 import 'package:notify/features/notify/presentation/views/widgets/no_notes.dart';
@@ -71,7 +70,7 @@ class ProfileBody extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'Today\'s tasks',
-            style: GoogleFonts.nunito(
+            style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.w800,
                 color: theme ? Colors.white : Colors.black),

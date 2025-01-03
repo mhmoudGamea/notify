@@ -10,13 +10,13 @@ class NotesCubit extends Cubit<NotesState> {
   NotesCubit(this._myNotesRepo) : super(NotesInitial());
 
   Future<void> getNotes([String? date]) async {
-    emit(NotesLoading());
-    final response = await _myNotesRepo.getAllNotes(date);
-    response.fold((failure) {
-      emit(NotesFailure(failure.errMessage));
-    }, (success) {
-      emit(NotesSuccess(success));
-    });
+    // emit(NotesLoading());
+    // final response = await _myNotesRepo.getAllNotes(date);
+    // response.fold((failure) {
+    //   emit(NotesFailure(failure.errMessage));
+    // }, (success) {
+    //   emit(NotesSuccess(success));
+    // });
   }
 
   Future<void> deleteNote({required int noteId}) async {

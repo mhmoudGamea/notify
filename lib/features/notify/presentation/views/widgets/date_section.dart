@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +12,6 @@ class DateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(DateTime.now().toIso8601String());
     return Padding(
       padding: const EdgeInsets.only(left: 15),
       child: DatePicker(

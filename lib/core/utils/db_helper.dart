@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
@@ -27,6 +29,7 @@ class DBHelper {
   }
 
   static Future<int> insertDB(Map<String, dynamic> data) async {
+    log('Final insertion to my sqlite done');
     return _db!
         .insert(tableName, data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -53,18 +56,4 @@ class DBHelper {
   static Future<List<Map<String, dynamic>>> queryAll() async {
     return await _db!.query(tableName);
   }
-
-  // //this method used to get all entries where isCompleted column = 0 or 1 [mean it's todo  or completed]
-  // static Future<List<Map<String, dynamic>>> queryIsCompleted(
-  //     int isCompleted) async {
-  //   return await _db!
-  //       .query(tableName, where: 'isCompleted = ?', whereArgs: [isCompleted]);
-  // }
-
-  // //this 'll get all notes that it's deadline has gone without complete it
-  // static Future<List<Map<String, dynamic>>> queryDelayed(
-  //     {required String currentDate}) async {
-  //   return await _db!
-  //       .query(tableName, where: 'date < ?', whereArgs: [currentDate]);
-  // }
 }

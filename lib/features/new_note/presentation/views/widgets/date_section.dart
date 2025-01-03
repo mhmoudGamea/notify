@@ -15,8 +15,8 @@ class DateSection extends StatelessWidget {
     return InputField(
       // note that you can use blocBuilder here instead of context.watch()
       hint: DateFormat.yMd().format(context.watch<FormCubit>().getCurrentDate),
-      readOnly: true,
-      enableIcon: true,
+      // readOnly: true,
+      // enableIcon: true,
       icon: Icons.date_range_rounded,
       onPress: () async {
         DateTime? noteDate = await Helper.getDatePicker(context);

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/utils/db_helper.dart';
 import 'package:notify/features/new_note/data/models/note_model.dart';
@@ -15,16 +17,18 @@ class NoteRepoImpl extends NoteRepo {
       final result = await DBHelper.insertDB(noteModel.toJson());
       if (result == 0) {
         // failure inserting
+        log('Error in note repo impl - addNewNote: Failed to adding this note');
         return left(
             DataBaseFailure.fromAddingNote('Failed to adding this note'));
       }
+      log('Success in note repo impl - addNewNote: Success to adding this note');
       return right(
           DataBaseSuccess.fromAddingNote('Success to adding this note'));
     } on DatabaseException catch (error) {
-      print('DBBBBB: $error');
+      log('DBBBBB: $error');
       return left(DataBaseFailure.fromAddingNote(error.toString()));
     } catch (error) {
-      print(error.toString());
+      log(error.toString());
       return left(
           DataBaseFailure.fromAddingNote('Error happen while adding note'));
     }

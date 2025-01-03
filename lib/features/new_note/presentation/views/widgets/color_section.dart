@@ -22,7 +22,6 @@ class ColorSection extends StatelessWidget {
                 (color) => GestureDetector(
                   onTap: () {
                     formData.setSelectedColor = color;
-                    print(color.value);
                   },
                   child: CircleAvatar(
                     radius: 13,

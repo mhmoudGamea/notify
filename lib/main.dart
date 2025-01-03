@@ -34,9 +34,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ThemeCubit()
               ..toggleThemeMode(
                   GetIt.I.get<SharedPreferences>().getBool('darkMode'))),
-        BlocProvider(
-            create: (context) => NotesCubit(MyNotesRepoImpl())
-              ..getNotes(DateFormat.yMd().format(DateTime.now()))),
+        BlocProvider(create: (context) => NotesCubit(MyNotesRepoImpl())),
       ],
       child: const HomePage(),
     );
