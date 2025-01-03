@@ -1,16 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notify/core/utils/helper.dart';
-import 'package:notify/features/notify/presentation/views/widgets/notify_view_body.dart';
+import 'package:notify/core/utils/notification_services.dart';
 
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_theme.dart';
-import '../../../../core/utils/notification_services.dart';
+import '../../../../core/utils/helper.dart';
 import '../../../profile/presentation/views/profile_view.dart';
 import '../model_views/theme/theme_cubit.dart';
+import 'widgets/notify_view_body.dart';
 
 class NotifyView extends StatelessWidget {
   static const String rn = '/';
@@ -22,8 +22,7 @@ class NotifyView extends StatelessWidget {
     return Scaffold(
       appBar: Helper.getAppBar(
           onTap: () {
-            // print(mode);
-            _changeTheme(context, mode);
+            _changeTheme(context);
           },
           router: () {
             GoRouter.of(context).push(ProfileView.rn);
@@ -38,11 +37,15 @@ class NotifyView extends StatelessWidget {
   }
 }
 
-_changeTheme(BuildContext context, bool theme) {
-  context.read<ThemeCubit>().toggleThemeMode();
-  // NotificationServices.showNotification(
-  //   title: 'Theme Changed',
-  //   body: theme ? 'Light theme activated' : 'Dark theme activated',
-  //   flnp: GetIt.I.get<FlutterLocalNotificationsPlugin>(),
-  // );
+_changeTheme(BuildContext context) {
+  final themeCubit = BlocProvider.of<ThemeCubit>(context);
+  themeCubit.toggleThemeMode();
+
+  log(themeCubit.getIsDark.toString());
+
+  NotificationServices.showBasicNotification(
+    notifTitle: 'Theme Changed',
+    notifBody:
+        themeCubit.getIsDark ? 'Dark theme activated' : 'Light theme activated',
+  );
 }

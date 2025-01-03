@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:notify/core/config/constants.dart';
 import 'package:notify/core/utils/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,21 +32,19 @@ class ThemeCubit extends Cubit<ThemeState> {
     );
   }
 
-  var _isDark = false;
+  bool _isDark = false;
 
   bool get getIsDark {
     return _isDark;
   }
 
-  void toggleThemeMode([bool? fromShared]) async {
-    if (fromShared != null) {
-      _isDark = fromShared;
-      emit(ThemeModeChanged());
-    } else {
-      _isDark = !_isDark;
-      emit(ThemeModeChanged());
-    }
-    await GetIt.I.get<SharedPreferences>().setBool('darkMode', _isDark);
+  toggleThemeMode() async {
+    SharedPreferences prefs = GetIt.instance<SharedPreferences>();
+
+    _isDark = prefs.getBool(Constants.kIsDarkMode) ?? false;
+    _isDark = !_isDark;
+    prefs.setBool(Constants.kIsDarkMode, _isDark);
+    emit(ThemeModeChanged());
   }
 
   // this function 'll change the theme of datePicker and timePicker

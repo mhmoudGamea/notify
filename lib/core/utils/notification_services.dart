@@ -9,7 +9,7 @@ import '../config/constants.dart';
 abstract class NotificationServices {
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin =
-      GetIt.instance<FlutterLocalNotificationsPlugin>();
+      GetIt.I.get<FlutterLocalNotificationsPlugin>();
 
   /// when user tap on notification when app is running [Foreground]
   static Future<void> onForegroundTap(
@@ -35,7 +35,7 @@ abstract class NotificationServices {
   /// getCounter method to give each notification a unique [NotificationId]
   /// so first notif id = [1], second notif id = [2] and so on...
   static Future<int> getCounter() async {
-    SharedPreferences prefs = GetIt.instance<SharedPreferences>();
+    SharedPreferences prefs = GetIt.I.get<SharedPreferences>();
     var counter = (prefs.getInt(Constants.kNotificationCounter) ?? 0) + 1;
     await prefs.setInt(Constants.kNotificationCounter, counter);
     return counter;
@@ -49,6 +49,8 @@ abstract class NotificationServices {
         AndroidNotificationDetails(
       channelId,
       channelName,
+      importance: Importance.max,
+      priority: Priority.high,
     );
 
     NotificationDetails notificationDetails = NotificationDetails(

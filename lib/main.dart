@@ -16,8 +16,8 @@ import 'features/notify/presentation/model_views/theme/theme_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = Observer();
+  await ServiceLocator.init();
   await Future.wait([
-    ServiceLocator.init(),
     DBHelper.databaseInit(),
     NotificationServices.init(),
   ]);
@@ -31,9 +31,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => ThemeCubit()
-              ..toggleThemeMode(
-                  GetIt.I.get<SharedPreferences>().getBool('darkMode'))),
+          create: (context) => ThemeCubit(),
+        ),
         BlocProvider(
           create: (context) => NotesCubit(MyNotesRepoImpl())
             ..getNotes(

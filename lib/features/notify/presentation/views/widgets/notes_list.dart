@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
@@ -21,8 +19,8 @@ class NotesList extends StatelessWidget {
         final DateTime noteTime =
             DateFormat.Hm().parse(notesList[index].startTime);
         final String time = DateFormat('HH:MM').format(noteTime);
-        log(noteTime.toString());
-        log(time);
+        //TODO: implement schedule notification here
+
         // NotificationServices.scheduleNotification(
         //   flnp: FlutterLocalNotificationsPlugin(),
         //   hour: int.parse(time.split(':')[0]),

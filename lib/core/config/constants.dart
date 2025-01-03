@@ -10,4 +10,7 @@ abstract class Constants {
 
   // counter constant of notification id
   static const String kNotificationCounter = 'notification_counter';
+
+  // key for dark and light mode
+  static const String kIsDarkMode = 'is_dark_mode';
 }
