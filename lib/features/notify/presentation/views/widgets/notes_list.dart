@@ -1,11 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 import 'package:notify/core/utils/helper.dart';
-import 'package:notify/core/utils/notification_services.dart';
 import 'package:notify/features/notify/data/models/my_notes_model.dart';
 import 'package:notify/features/notify/presentation/views/widgets/note_item.dart';
 

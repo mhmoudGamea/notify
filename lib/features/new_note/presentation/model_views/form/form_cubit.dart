@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -159,13 +157,6 @@ class FormCubit extends Cubit<FormState> {
     String startTime = getStartTime.format(context);
     String endTime = getEndTime.format(context);
 
-    // log(date);
-    // log(startTime);
-    // log(endTime);
-    // log(getSelectedRemind.toString());
-    // log(getSelectedRepeat);
-    // log(getSelectedColor.value.toString());
-
     final response = await _noteRepo.addNewNote(
       noteModel: NoteModel(
         title: getTitleController.text,
@@ -179,10 +170,6 @@ class FormCubit extends Cubit<FormState> {
         isCompleted: 0,
       ),
     );
-
-    // log();
-
-    // response.fold(ifLeft, ifRight)
 
     response.fold((failure) {
       Helper.toastMessage(context,

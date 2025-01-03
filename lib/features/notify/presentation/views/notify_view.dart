@@ -40,9 +40,9 @@ class NotifyView extends StatelessWidget {
 
 _changeTheme(BuildContext context, bool theme) {
   context.read<ThemeCubit>().toggleThemeMode();
-  NotificationServices.showNotification(
-    title: 'Theme Changed',
-    body: theme ? 'Light theme activated' : 'Dark theme activated',
-    flnp: GetIt.I.get<FlutterLocalNotificationsPlugin>(),
-  );
+  // NotificationServices.showNotification(
+  //   title: 'Theme Changed',
+  //   body: theme ? 'Light theme activated' : 'Dark theme activated',
+  //   flnp: GetIt.I.get<FlutterLocalNotificationsPlugin>(),
+  // );
 }

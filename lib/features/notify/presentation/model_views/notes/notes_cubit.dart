@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/features/notify/data/models/my_notes_model.dart';
 import 'package:notify/features/notify/data/repos/my_notes_repo.dart';
 
-import '../../../../new_note/data/models/note_model.dart';
-
 part 'notes_state.dart';
 
 class NotesCubit extends Cubit<NotesState> {
