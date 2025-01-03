@@ -16,9 +16,10 @@ class NotesSection extends StatelessWidget {
         builder: (context, state) {
           if (state is NotesSuccess) {
             if (state.myNotesList.isEmpty) {
-              return const NoNotes(
-                  message:
-                      'No notes added yet. please add your first note for this day');
+              return const NoNotes(message: '''
+What do you want to do today?
+press Add Task button to add your tasks.
+''');
             }
             return NotesList(notesList: state.myNotesList);
           } else if (state is NotesFailure) {

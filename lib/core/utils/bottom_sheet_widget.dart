@@ -62,8 +62,7 @@ class BottomSheetWidget extends StatelessWidget {
             textColor: Colors.white,
             onPress: () async {
               await noteData.deleteNote(noteId: notesModel.id);
-              await noteData.getNotes(
-                  date: DateFormat.yMd().format(DateTime.now()));
+              await noteData.getNotes(date: notesModel.date);
               GoRouter.of(context).pop();
             },
           ),

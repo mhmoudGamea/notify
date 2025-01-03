@@ -53,7 +53,7 @@ class NoteItem extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 5),
             color: AppTheme.lightBlue,
-            width: 1.5,
+            width: 2,
             height: 100,
           ),
           //status of note [done, progress, todo]

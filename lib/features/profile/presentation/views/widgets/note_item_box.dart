@@ -20,6 +20,7 @@ class NoteItemBox extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // title , start & end time and note
           Text(noteModel.title,
