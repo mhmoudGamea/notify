@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -49,8 +51,7 @@ class BottomSheetWidget extends StatelessWidget {
               onPress: () async {
                 await noteData.updateNote(
                     noteId: notesModel.id, data: {'isCompleted': 1});
-                await noteData.getNotes(
-                    date: DateFormat.yMd().format(DateTime.now()));
+                await noteData.getNotes(date: notesModel.date);
                 GoRouter.of(context).pop();
               },
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:notify/core/utils/app_routes.dart';
 import 'package:notify/core/utils/db_helper.dart';
@@ -8,7 +7,6 @@ import 'package:notify/core/utils/observer.dart';
 import 'package:notify/core/utils/service_locator.dart';
 import 'package:notify/features/notify/data/repos/my_notes_repo_impl.dart';
 import 'package:notify/features/notify/presentation/model_views/notes/notes_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/utils/notification_services.dart';
 import 'features/notify/presentation/model_views/theme/theme_cubit.dart';

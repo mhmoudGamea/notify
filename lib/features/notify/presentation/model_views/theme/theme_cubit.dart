@@ -35,7 +35,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   bool _isDark = false;
 
   bool get getIsDark {
-    return _isDark;
+    SharedPreferences prefs = GetIt.instance<SharedPreferences>();
+    return prefs.getBool(Constants.kIsDarkMode) ?? false;
   }
 
   toggleThemeMode() async {
