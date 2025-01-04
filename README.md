@@ -13,6 +13,7 @@
 <h6>Local notification</h6>
 
 > I use it to get an alarm before starting time of the note by 1 minute
+
 > I'm also using <a href="https://pub.dev/packages/workmanager">workmanager</a></h4> package to make notification every day at 8:00 AM to app users even if the app is closed so the user can open the app and add his new day tasks.
 
 > **_NOTE:_**  You want to change notification tone ? simply go to
