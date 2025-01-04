@@ -3,6 +3,7 @@
   <img src='screenshot/1.png' width='230'/>
   <img src='screenshot/2.png' width='230'/>
   <img src='screenshot/3.png' width='230'/>
+  <img src='screenshot/5.png' width='230'/>
 </div>
 
 <h4>more screenshots in screenshots folder <a href="https://github.com/mhmoudGamea/notify/tree/main/screenshot">  go</a></h4>
@@ -11,8 +12,8 @@
 
 <h6>Local notification</h6>
 
-> I use it to get an alarm before starting time of the note
-> Or to have a scheduled notification so you can have an alarm Daily, Weekly or Monthly
+> I use it to get an alarm before starting time of the note by 1 minute
+> I'm also using <a href="https://pub.dev/packages/workmanager">workmanager</a></h4> package to make notification every day at 8:00 AM to app users even if the app is closed so the user can open the app and add his new day tasks.
 
 > **_NOTE:_**  You want to change notification tone ? simply go to
 

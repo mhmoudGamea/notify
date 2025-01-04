@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:notify/core/utils/app_theme.dart';
+import 'package:notify/core/utils/notification_services.dart';
 import 'package:notify/features/new_note/data/models/note_model.dart';
 import 'package:notify/features/new_note/data/repos/note_repo.dart';
 import 'package:notify/features/notify/presentation/model_views/notes/notes_cubit.dart';
@@ -66,51 +67,51 @@ class FormCubit extends Cubit<FormState> {
     emit(StartTimeInputChanged());
   }
 
-  //Remind dropDown section
-  final List<int> _remind = [5, 10, 15, 20];
+  // //Remind dropDown section
+  // final List<int> _remind = [5, 10, 15, 20];
 
-  var _selectedRemind = 5;
+  // var _selectedRemind = 5;
 
-  int get getSelectedRemind {
-    return _selectedRemind;
-  }
+  // int get getSelectedRemind {
+  //   return _selectedRemind;
+  // }
 
-  set setSelectedRemind(int value) {
-    _selectedRemind = value;
-    emit(RemindChanged());
-  }
+  // set setSelectedRemind(int value) {
+  //   _selectedRemind = value;
+  //   emit(RemindChanged());
+  // }
 
-  List<DropdownMenuItem<int>> getRemindDropDownMenuItems() {
-    return _remind
-        .map((element) => DropdownMenuItem(
-              value: element,
-              child: Text(element.toString()),
-            ))
-        .toList();
-  }
+  // List<DropdownMenuItem<int>> getRemindDropDownMenuItems() {
+  //   return _remind
+  //       .map((element) => DropdownMenuItem(
+  //             value: element,
+  //             child: Text(element.toString()),
+  //           ))
+  //       .toList();
+  // }
 
-  //Remind dropDown section
-  final List<String> _repeat = ['None', 'Daily', 'Weekly', 'Monthly'];
+  // //Remind dropDown section
+  // final List<String> _repeat = ['None', 'Daily', 'Weekly', 'Monthly'];
 
-  var _selectedRepeat = 'None';
+  // var _selectedRepeat = 'None';
 
-  String get getSelectedRepeat {
-    return _selectedRepeat;
-  }
+  // String get getSelectedRepeat {
+  //   return _selectedRepeat;
+  // }
 
-  set setSelectedRepeat(String value) {
-    _selectedRepeat = value;
-    emit(RepeatChanged());
-  }
+  // set setSelectedRepeat(String value) {
+  //   _selectedRepeat = value;
+  //   emit(RepeatChanged());
+  // }
 
-  List<DropdownMenuItem<String>> getRepeatDropDownMenuItems() {
-    return _repeat
-        .map((element) => DropdownMenuItem(
-              value: element,
-              child: Text(element),
-            ))
-        .toList();
-  }
+  // List<DropdownMenuItem<String>> getRepeatDropDownMenuItems() {
+  //   return _repeat
+  //       .map((element) => DropdownMenuItem(
+  //             value: element,
+  //             child: Text(element),
+  //           ))
+  //       .toList();
+  // }
 
   //Color section
   final List<Color> _notesColor = [
@@ -164,8 +165,6 @@ class FormCubit extends Cubit<FormState> {
         date: date,
         startTime: startTime,
         endTime: endTime,
-        remind: getSelectedRemind,
-        repeat: getSelectedRepeat,
         color: getSelectedColor.value,
         isCompleted: 0,
       ),
@@ -177,8 +176,16 @@ class FormCubit extends Cubit<FormState> {
     }, (success) async {
       await BlocProvider.of<NotesCubit>(context).getNotes(
           date: DateFormat.yMd().format(DateTime.now())); // =>  1/3/2025
-      Helper.toastMessage(context,
-          type: Message.success, message: success.successMessage);
+
+      await NotificationServices.showScheduleNotification(
+        notifTitle: getTitleController.text,
+        notifBody: getNoteController.text,
+        currentTaskData: getCurrentDate,
+        startTaskTime: getStartTime,
+      );
+
+      // Helper.toastMessage(context,
+      //     type: Message.success, message: success.successMessage);
     });
     GoRouter.of(context).pop();
   }

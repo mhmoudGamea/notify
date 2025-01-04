@@ -5,8 +5,6 @@ class MyNotesModel {
   final String date;
   final String startTime;
   final String endTime;
-  final int remind;
-  final String repeat;
   final int color;
   int? isCompleted;
 
@@ -17,8 +15,6 @@ class MyNotesModel {
     required this.date,
     required this.startTime,
     required this.endTime,
-    required this.remind,
-    required this.repeat,
     required this.color,
     this.isCompleted,
   });
@@ -29,8 +25,6 @@ class MyNotesModel {
         date: json['date'],
         startTime: json['startTime'],
         endTime: json['endTime'],
-        remind: json['remind'],
-        repeat: json['repeat'],
         color: json['color'],
         isCompleted: json['isCompleted'],
       );

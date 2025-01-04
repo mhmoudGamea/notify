@@ -65,11 +65,9 @@ abstract class Helper {
     );
   }
 
-  static InputBorder getBorder({Color color = Colors.grey}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(width: 1.2, color: color),
-      gapPadding: 10,
+  static InputBorder getBorder({Color color = Colors.black}) {
+    return UnderlineInputBorder(
+      borderSide: BorderSide(width: 1, color: color),
     );
   }
 

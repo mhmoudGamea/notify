@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:notify/features/notify/data/models/my_notes_model.dart';
 
 import '../../features/notify/presentation/model_views/notes/notes_cubit.dart';

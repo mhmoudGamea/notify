@@ -4,8 +4,6 @@ class NoteModel {
   final String date;
   final String startTime;
   final String endTime;
-  final int remind;
-  final String repeat;
   final int color;
   int? isCompleted;
 
@@ -15,8 +13,6 @@ class NoteModel {
     required this.date,
     required this.startTime,
     required this.endTime,
-    required this.remind,
-    required this.repeat,
     required this.color,
     this.isCompleted,
   });
@@ -27,8 +23,6 @@ class NoteModel {
         'date': date,
         'startTime': startTime,
         'endTime': endTime,
-        'remind': remind,
-        'repeat': repeat,
         'color': color,
         'isCompleted': isCompleted,
       };

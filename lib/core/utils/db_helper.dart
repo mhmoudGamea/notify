@@ -23,7 +23,7 @@ class DBHelper {
       version: version,
       onCreate: (db, version) async {
         return await db.execute(
-            "CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, note TEXT, date STRING, startTime STRING, endTime STRING, remind INTEGER, repeat STRING, color INTEGER, isCompleted INTEGER)");
+            "CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, note TEXT, date STRING, startTime STRING, endTime STRING, color INTEGER, isCompleted INTEGER)");
       },
     );
   }

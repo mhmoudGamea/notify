@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get_it/get_it.dart';
@@ -75,8 +76,8 @@ abstract class NotificationServices {
     );
   }
 
-  /// method used to show very basic local notification
-  static Future<void> showPeriodicNotification({
+  /// method used to show very repeated local notification [everyMinute, hourly, daily]
+  static Future<void> showRepeatedNotification({
     required String notifTitle,
     required String notifBody,
     required RepeatInterval repeatInterval,
@@ -96,20 +97,31 @@ abstract class NotificationServices {
     );
   }
 
-  static Future<tz.TZDateTime> getScheduleDate() async {
+  static Future<tz.TZDateTime> getScheduleDate({
+    required DateTime currentTaskData,
+    required TimeOfDay startTaskTime,
+  }) async {
     final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
     final currentLocation = tz.getLocation(currentTimeZone);
     tz.setLocalLocation(currentLocation);
 
-    final tz.TZDateTime now = tz.TZDateTime.now(currentLocation);
-    final tz.TZDateTime next = now.add(const Duration(seconds: 10));
-    return next;
+    final tz.TZDateTime dailyScheduledNotification = tz.TZDateTime(
+      tz.local,
+      currentTaskData.year,
+      currentTaskData.month,
+      currentTaskData.day,
+      startTaskTime.hour,
+      startTaskTime.minute,
+    ).subtract(const Duration(minutes: 1));
+    return dailyScheduledNotification;
   }
 
   /// method used to show schedule local notification
   static Future<void> showScheduleNotification({
     required String notifTitle,
     required String notifBody,
+    required DateTime currentTaskData,
+    required TimeOfDay startTaskTime,
   }) async {
     var notificationId = await getCounter();
 
@@ -120,7 +132,52 @@ abstract class NotificationServices {
       notificationId,
       notifTitle,
       notifBody,
-      await getScheduleDate(),
+      await getScheduleDate(
+          currentTaskData: currentTaskData, startTaskTime: startTaskTime),
+      notificationDetails,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      // androidScheduleMode: AndroidScheduleMode.exact,
+    );
+  }
+
+  static Future<tz.TZDateTime> getDailyScheduleDate() async {
+    final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    final tz.Location currentLocation = tz.getLocation(currentTimeZone);
+    tz.setLocalLocation(currentLocation);
+
+    final tz.TZDateTime now = tz.TZDateTime.now(currentLocation);
+
+    final tz.TZDateTime dailyScheduledNotification = tz.TZDateTime(
+      currentLocation,
+      now.year,
+      now.month,
+      now.day,
+      8,
+      0,
+      0,
+    );
+    return dailyScheduledNotification.isBefore(now)
+        ? dailyScheduledNotification.add(const Duration(days: 1))
+        : dailyScheduledNotification;
+  }
+
+  /// method used to remind the user every day at 8:00 AM to add his tasks
+  /// so it is a compination between periodically and schedule notif so you can say
+  static Future<void> showDailyScheduledNotification({
+    required String notifTitle,
+    required String notifBody,
+  }) async {
+    var notificationId = await getCounter();
+
+    NotificationDetails notificationDetails = getNotificationDetails(
+        channelId: '3', channelName: '8:00 AM repeated schedule notification');
+
+    _flutterLocalNotificationsPlugin.zonedSchedule(
+      notificationId,
+      notifTitle,
+      notifBody,
+      await getDailyScheduleDate(),
       notificationDetails,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,

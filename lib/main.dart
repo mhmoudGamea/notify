@@ -7,17 +7,21 @@ import 'package:notify/core/utils/observer.dart';
 import 'package:notify/core/utils/service_locator.dart';
 import 'package:notify/features/notify/data/repos/my_notes_repo_impl.dart';
 import 'package:notify/features/notify/presentation/model_views/notes/notes_cubit.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/utils/notification_services.dart';
+import 'core/utils/work_manager_service.dart';
 import 'features/notify/presentation/model_views/theme/theme_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = Observer();
   await ServiceLocator.init();
+  tz.initializeTimeZones();
   await Future.wait([
     DBHelper.databaseInit(),
     NotificationServices.init(),
+    WorkManagerService.init(),
   ]);
   runApp(const MyApp());
 }

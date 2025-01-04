@@ -6,7 +6,6 @@ import 'package:notify/features/new_note/presentation/views/widgets/label_text.d
 import 'package:notify/features/new_note/presentation/views/widgets/time_section.dart';
 
 import '../../model_views/form/form_cubit.dart';
-import 'custom_drop_down.dart';
 import 'date_section.dart';
 import 'input_field.dart';
 
@@ -18,53 +17,50 @@ class AddNoteViewBody extends StatelessWidget {
     final formData = BlocProvider.of<FormCubit>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const LabelText(title: 'Title'),
-            InputField(
-              hint: 'Enter title here.',
-              controller: formData.getTitleController,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const LabelText(title: 'Title'),
+                  InputField(
+                    hint: 'Enter title here.',
+                    controller: formData.getTitleController,
+                  ),
+                  const SizedBox(height: 10),
+                  const LabelText(title: 'Note'),
+                  InputField(
+                    hint: 'Enter note here.',
+                    controller: formData.getNoteController,
+                  ),
+                  const SizedBox(height: 10),
+                  const LabelText(title: 'Date'),
+                  const DateSection(),
+                  const SizedBox(height: 10),
+                  const TimeSection(),
+                  const SizedBox(height: 10),
+                  const ColorSection(),
+                ],
+              ),
             ),
-            const LabelText(title: 'Note'),
-            InputField(
-              hint: 'Enter note here.',
-              maxLines: 4,
-              controller: formData.getNoteController,
-            ),
-            const LabelText(title: 'Date'),
-            const DateSection(),
-            const TimeSection(),
-            const LabelText(title: 'Remind'),
-            CustomDropDown(
-              hint:
-                  '${context.watch<FormCubit>().getSelectedRemind} minutes early',
-              list: formData.getRemindDropDownMenuItems(),
-            ),
-            const SizedBox(height: 10),
-            const LabelText(title: 'Repeat'),
-            CustomDropDown(
-              hint: context.watch<FormCubit>().getSelectedRepeat,
-              list: formData.getRepeatDropDownMenuItems(),
-              remind: false,
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const ColorSection(),
-                CTextButton(
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: CTextButton(
                   text: 'Add Note',
                   onPress: () {
                     formData.validate(context);
                   },
-                )
-              ],
-            )
-          ],
-        ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
